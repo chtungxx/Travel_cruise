@@ -1,4 +1,4 @@
-`台灣郵輪之旅 2026`html
+```html
 <!DOCTYPE html>
 <html lang="zh-HK">
 <head>
@@ -67,8 +67,8 @@
         .background-stickers-layer {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            z-index: -5; /* 確保低於所有內容 */
-            pointer-events: none; /* 讓點擊穿透 */
+            z-index: -5; 
+            pointer-events: none; 
         }
 
         /* 3. 手帳風不規則圓角外框 */
@@ -183,7 +183,7 @@
     <div class="vintage-scrapbook-bg"></div>
     <div class="bg-bubbles"></div>
 
-    <!-- 背景散落的水彩貼紙 (統一放在底層容器中) -->
+    <!-- 背景散落的水彩貼紙 -->
     <div class="background-stickers-layer">
         <div class="die-cut-sticker absolute top-[12%] left-[4%] transform -rotate-12 w-16 h-16">
             <span class="text-4xl watercolor-ink">🛟</span>
@@ -208,8 +208,8 @@
         </div>
     </div>
 
-    <!-- Header (復古水軍標題區) -->
-    <header class="bg-vintage text-white px-6 pb-8 pt-safe pt-12 relative shadow-lg" style="border-radius: 0 0 15px 25px / 0 0 20px 10px;">
+    <!-- Header (復古水軍標題區) - 加入了 id="main-header" 讓 JS 可以控制 -->
+    <header id="main-header" class="bg-vintage text-white px-6 pb-8 pt-safe pt-12 relative shadow-lg transition-opacity duration-300" style="border-radius: 0 0 15px 25px / 0 0 20px 10px;">
         <div class="pennants-container">
             <div class="pennant"></div><div class="pennant"></div><div class="pennant"></div>
             <div class="pennant"></div><div class="pennant"></div><div class="pennant"></div>
@@ -236,7 +236,7 @@
     </header>
 
     <!-- 主內容區 -->
-    <main class="p-5 relative z-10" id="main-content">
+    <main class="p-5 relative z-10 transition-all duration-300" id="main-content">
         
         <!-- 頁面 1: 行程摘要 -->
         <section id="page-overview" class="page-section space-y-4 relative">
@@ -641,10 +641,28 @@
             }
         }
 
+        // --- 修正後的切換分頁邏輯 ---
         function switchTab(tabId) {
+            // 隱藏所有分頁內容
             document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden'));
+            // 顯示當前分頁
             document.getElementById(`page-${tabId}`).classList.remove('hidden');
             
+            // 【關鍵修改】：處理頂部標題方格顯示與隱藏
+            const header = document.getElementById('main-header');
+            const mainContent = document.getElementById('main-content');
+            
+            if (tabId === 'overview') {
+                // 如果是「總覽與備註」，顯示頂部標題方格
+                header.classList.remove('hidden');
+                mainContent.classList.remove('pt-safe', 'pt-8'); // 移除額外的安全頂部空間
+            } else {
+                // 如果是「自訂行程」或「開支記帳」，隱藏頂部標題方格
+                header.classList.add('hidden');
+                mainContent.classList.add('pt-safe', 'pt-8'); // 增加安全頂部空間，防止內容撞到 iPhone 頂部時間
+            }
+            
+            // 處理底部導航列顏色切換
             document.querySelectorAll('.nautical-tab').forEach(el => {
                 el.classList.remove('active', 'text-vintage');
                 el.classList.add('text-gray-400');
