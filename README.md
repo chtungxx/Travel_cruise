@@ -1,4 +1,4 @@
-# Travel_cruise[ 郵輪日記V1.html](https://github.com/user-attachments/files/27080697/V1.html)
+[TripV2.html](https://github.com/user-attachments/files/27080809/TripV2.html)
 ```html
 <!DOCTYPE html>
 <html lang="zh-HK">
@@ -21,7 +21,7 @@
                 extend: {
                     colors: {
                         navy: '#1B365D',
-                        ocean: '#6B90B5', /* 更柔和的水彩藍 */
+                        ocean: '#6B90B5', /* 柔和水彩藍 */
                         sand: '#F4EFE6',
                         vintage: '#38587D', /* 復古靛藍 */
                         paper: '#F8F6F0', /* 暖白紙張色 */
@@ -40,6 +40,7 @@
             background-color: transparent;
             padding-bottom: 90px;
             -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
         }
 
         /* 1. 復古粗糙紙張背景 (Vintage Paper Texture) */
@@ -65,11 +66,11 @@
             background-size: 100vw 100vh;
         }
 
-        /* 3. 手帳風不規則圓角外框 (Hand-drawn Wavy Border) - 參考最後一張圖 */
+        /* 3. 手帳風不規則圓角外框 (Hand-drawn Wavy Border) */
         .collage-card {
             background-color: #FDFDFB;
-            border: 6px solid #A9C2D5; /* 淺藍色粗邊 */
-            border-radius: 15px 22px 18px 12px / 20px 14px 25px 16px; /* 不規則手繪感圓角 */
+            border: 6px solid #A9C2D5;
+            border-radius: 15px 22px 18px 12px / 20px 14px 25px 16px;
             position: relative;
             padding: 1.5rem 1.25rem 1.25rem 1.25rem;
             box-shadow: 2px 5px 10px rgba(0,0,0,0.05);
@@ -77,7 +78,6 @@
             margin-top: 2.5rem;
         }
         .collage-card::before {
-            /* 內部的虛線/點線框 */
             content: '';
             position: absolute;
             top: 4px; left: 4px; right: 4px; bottom: 4px;
@@ -93,7 +93,7 @@
             position: absolute;
             background: #FDFDFB;
             padding: 6px;
-            border-radius: 50%; /* 預設為圓形，可由行內樣式覆寫 */
+            border-radius: 50%;
             box-shadow: 2px 4px 10px rgba(0,0,0,0.06), inset 0 0 0 1px #fff;
             display: flex;
             align-items: center;
@@ -101,11 +101,12 @@
             border: 1px solid #EAE7DF;
             z-index: 20;
         }
+        
         /* 模擬水彩顏料的濾鏡效果 */
         .watercolor-ink {
             filter: sepia(0.2) saturate(0.6) hue-rotate(-5deg) opacity(0.9);
         }
-        
+
         .text-sticker {
             position: absolute;
             background: #fff;
@@ -147,7 +148,7 @@
         .pennant:nth-child(even) { border-top-color: #A9C2D5; animation-delay: 0s; }
         @keyframes swing { 0% { transform: rotate(4deg); } 100% { transform: rotate(-4deg); } }
         
-        /* 拼貼手帳風 Memo (保留第二張圖的設計，融入新背景) */
+        /* 拼貼手帳風 Memo */
         .scrapbook-memo-container {
             position: relative;
             margin-top: 3.5rem;
@@ -228,7 +229,7 @@
     <div class="vintage-scrapbook-bg"></div>
     <div class="bg-bubbles"></div>
 
-    <!-- 背景散落的水彩貼紙 (替換為參考圖的水彩白邊貼紙風格) -->
+    <!-- 背景散落的水彩貼紙 -->
     <div class="die-cut-sticker fixed top-[12%] left-[4%] z-[-5] transform -rotate-12 w-16 h-16">
         <span class="text-4xl watercolor-ink">🛟</span>
     </div>
@@ -339,14 +340,13 @@
                 </div>
             </div>
 
-            <!-- 拼貼手帳風 Memo (高度符合圖片二的設計，加入 NOTE 字樣) -->
+            <!-- 拼貼手帳風 Memo -->
             <div class="scrapbook-memo-container">
                 <div class="scrapbook-torn-bottom"></div>
                 <div class="scrapbook-paper shadow-md">
                     <div class="scrapbook-torn-top"></div>
                     <div class="scrapbook-pin"></div>
                     
-                    <!-- 手繪風 NOTE 標題貼紙 -->
                     <div class="absolute top-4 right-4 text-xl font-bold text-[#8DA5C4] font-handwriting transform rotate-6 opacity-80" style="text-shadow: 2px 2px 0px #fff;">NOTE</div>
                     
                     <h2 class="text-md font-bold text-vintage mb-1 flex items-center gap-2 relative z-10 mt-2">
@@ -449,7 +449,7 @@
                 </ol>
             </div>
 
-            <!-- CSS 繪製：衝浪板木牌 (參考圖一) -->
+            <!-- CSS 繪製：衝浪板木牌 -->
             <div class="flex flex-col items-center gap-1 my-8 opacity-90 transform rotate-2">
                 <div class="bg-[#A9C2D5] text-white px-5 py-2 rounded-[50%_50%_50%_50%/20%_20%_80%_80%] font-handwriting text-lg shadow-md border border-[#8DA5C4] flex items-center gap-2">
                     <i class="fa-solid fa-life-ring text-[#F4A298] text-sm"></i> LIFE
@@ -923,6 +923,4 @@
 </html>
 
 
-
 ```
-
