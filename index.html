@@ -63,7 +63,7 @@
             background-size: 100vw 100vh;
         }
 
-        /* 3. 背景貼紙層 (確保永遠在最底下) */
+        /* 3. 背景貼紙層 */
         .background-stickers-layer {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -208,7 +208,7 @@
         </div>
     </div>
 
-    <!-- Header (復古水軍標題區) - 加入了 id="main-header" 讓 JS 可以控制 -->
+    <!-- Header (復古水軍標題區) - 只在總覽顯示 -->
     <header id="main-header" class="bg-vintage text-white px-6 pb-8 pt-safe pt-12 relative shadow-lg transition-opacity duration-300" style="border-radius: 0 0 15px 25px / 0 0 20px 10px;">
         <div class="pennants-container">
             <div class="pennant"></div><div class="pennant"></div><div class="pennant"></div>
@@ -318,7 +318,7 @@
                 </div>
             </div>
 
-            <!-- 澎湖包車資訊 -->
+            <!-- 澎湖包車資訊 (已更新指定方案與景點) -->
             <div class="collage-card mt-8">
                 <!-- 實體水彩貼紙：望遠鏡 -->
                 <div class="die-cut-sticker w-14 h-14 -top-5 -right-2 transform rotate-12 z-20" style="border-radius: 15px;">
@@ -330,18 +330,27 @@
                     <i class="fa-solid fa-van-shuttle text-ocean"></i> 澎湖包車資訊
                 </h2>
                 <div class="space-y-4 text-sm text-gray-700 relative z-10">
-                    <div>
-                        <label class="block text-xs font-bold text-ocean mb-1">🚗 景點路線與商家備註 (自動儲存)</label>
-                        <textarea id="charter-notes" rows="4" class="w-full bg-white border border-borderblue rounded-lg p-3 text-sm outline-none focus:ring-1 focus:ring-vintage shadow-inner" placeholder="輸入路線，例如：約定早上 9:30 碼頭上車..."></textarea>
+                    <div class="p-4 bg-[#EAE7DF] border border-borderblue shadow-sm rounded-lg">
+                        <div class="flex flex-col gap-1.5 mb-3 border-b border-gray-300 pb-3">
+                            <p class="font-bold text-vintage"><i class="fa-solid fa-route text-ocean w-5 text-center"></i> 方案：本島北環5小時</p>
+                            <p class="font-bold text-vintage"><i class="fa-solid fa-sack-dollar text-ocean w-5 text-center"></i> 價錢：$3000 (1-4人)</p>
+                        </div>
+                        <p class="font-bold text-vintage mb-2"><i class="fa-solid fa-map-location-dot text-ocean w-5 text-center"></i> 暫定景點：</p>
+                        <div class="grid grid-cols-2 gap-1.5 text-[11px] text-gray-600 pl-1 font-medium">
+                            <div class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-[10px] text-[#A9C2D5]"></i> 通樑古榕</div>
+                            <div class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-[10px] text-[#A9C2D5]"></i> 澎湖跨海大橋</div>
+                            <div class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-[10px] text-[#A9C2D5]"></i> 小門鯨魚洞</div>
+                            <div class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-[10px] text-[#A9C2D5]"></i> 大菓葉柱狀玄武岩</div>
+                            <div class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-[10px] text-[#A9C2D5]"></i> 西嶼燈塔</div>
+                            <div class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-[10px] text-[#A9C2D5]"></i> 天堂路</div>
+                            <div class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-[10px] text-[#A9C2D5]"></i> 池西岩瀑</div>
+                            <div class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-[10px] text-[#A9C2D5]"></i> 虎目滬</div>
+                            <div class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-[10px] text-[#A9C2D5]"></i> 小摩西潮間帶</div>
+                        </div>
                     </div>
-                    <div class="p-3 bg-[#EAE7DF] border border-borderblue shadow-sm rounded-lg">
-                        <p class="font-bold text-vintage mb-1"><i class="fa-solid fa-camera-retro text-ocean"></i> 碼頭附近推薦景點 (備用)</p>
-                        <ul class="list-disc list-inside text-gray-600 space-y-1 text-xs mt-2">
-                            <li>中央老街 (步行約10分鐘)</li>
-                            <li>澎湖天后宮 (全台最古老媽祖廟)</li>
-                            <li>篤行十村 (文創園區)</li>
-                            <li>觀音亭親水遊憩區 (賞夕陽佳)</li>
-                        </ul>
+                    <div>
+                        <label class="block text-xs font-bold text-ocean mb-1">🚗 商家備註 (自動儲存)</label>
+                        <textarea id="charter-notes" rows="2" class="w-full bg-white border border-borderblue rounded-lg p-3 text-sm outline-none focus:ring-1 focus:ring-vintage shadow-inner" placeholder="輸入包車司機聯絡方式或備註..."></textarea>
                     </div>
                 </div>
             </div>
@@ -582,12 +591,14 @@
             if (savedIti) {
                 userItinerary = JSON.parse(savedIti);
             } else {
+                // 已更新為最新的預設行程
                 userItinerary = [
                     { id: 101, day: 2, time: "15:30", desc: "Focus 13珊瑚廣場", isBase: false },
                     { id: 102, day: 2, time: "17:00", desc: "新掘江商圈 (推薦：光南，Net，Poya)", isBase: false },
                     { id: 103, day: 2, time: "19:00", desc: "自強夜市 / 六合夜市", isBase: false },
                     { id: 104, day: 2, time: "21:30", desc: "碼頭附近逛逛 (全聯 鹽埕七賢三店)", isBase: false },
-                    { id: 105, day: 3, time: "09:30", desc: "包車: 通樑古榕 → 跨海大橋 → 二崁古厝 → 大菓葉玄武岩 → 漁翁島燈塔 → 西嶼海景秘境 (暫定)", isBase: false }
+                    { id: 105, day: 3, time: "09:30", desc: "五小時包車", isBase: false },
+                    { id: 106, day: 3, time: "14:30", desc: "碼頭商店街 吃海鮮及逛街", isBase: false }
                 ];
                 localStorage.setItem('cruiseItinerary', JSON.stringify(userItinerary));
             }
@@ -607,11 +618,9 @@
             document.getElementById('ex-hkd').addEventListener('input', calculateRate);
             document.getElementById('ex-twd').addEventListener('input', calculateRate);
 
-            // 監聽分類改變，更新快速標籤
             document.getElementById('exp-category').addEventListener('change', (e) => {
                 renderQuickOptions(e.target.value);
             });
-            // 初始化渲染快速標籤
             renderQuickOptions(document.getElementById('exp-category').value);
 
             const savedExp = localStorage.getItem('cruiseExpenses');
@@ -619,7 +628,6 @@
             renderExpenses();
         }
 
-        // 渲染快速標籤功能
         function renderQuickOptions(category) {
             const container = document.getElementById('quick-options');
             container.innerHTML = '';
@@ -641,28 +649,21 @@
             }
         }
 
-        // --- 修正後的切換分頁邏輯 ---
         function switchTab(tabId) {
-            // 隱藏所有分頁內容
             document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden'));
-            // 顯示當前分頁
             document.getElementById(`page-${tabId}`).classList.remove('hidden');
             
-            // 【關鍵修改】：處理頂部標題方格顯示與隱藏
             const header = document.getElementById('main-header');
             const mainContent = document.getElementById('main-content');
             
             if (tabId === 'overview') {
-                // 如果是「總覽與備註」，顯示頂部標題方格
                 header.classList.remove('hidden');
-                mainContent.classList.remove('pt-safe', 'pt-8'); // 移除額外的安全頂部空間
+                mainContent.classList.remove('pt-safe', 'pt-8');
             } else {
-                // 如果是「自訂行程」或「開支記帳」，隱藏頂部標題方格
                 header.classList.add('hidden');
-                mainContent.classList.add('pt-safe', 'pt-8'); // 增加安全頂部空間，防止內容撞到 iPhone 頂部時間
+                mainContent.classList.add('pt-safe', 'pt-8');
             }
             
-            // 處理底部導航列顏色切換
             document.querySelectorAll('.nautical-tab').forEach(el => {
                 el.classList.remove('active', 'text-vintage');
                 el.classList.add('text-gray-400');
